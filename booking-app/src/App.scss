@@ -1,0 +1,33 @@
+$background-color: #f7f9fd;
+$confirm-color: #2ebaa7;
+
+.app-header {
+  background-color: $background-color;
+  padding: 1rem;
+}
+
+.main-content {
+  background-color: $background-color;
+  padding: 1rem;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.booking-info {
+  display: flex;
+  flex-direction: row;
+}
+
+.booking-confirmation {
+  display: flex;
+  flex-direction: row;
+  &__confirm-section {
+    &--button {
+      color: $confirm-color;
+    }
+  }
+}
