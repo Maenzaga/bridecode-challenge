@@ -1,0 +1,36 @@
+$confirm-color: #2ebaa7;
+
+.card-container {
+  padding: 1rem;
+  margin: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+}
+
+.image-container {
+  .booking-image {
+    width: 6.5rem;
+    height: 5.5rem;
+    border-radius: 50%;
+  }
+}
+
+.booking-info {
+  display: flex;
+  flex-direction: row;
+  &__names-section {
+    margin-left: 1rem;
+  }
+}
+
+.booking-confirmation {
+  display: flex;
+  flex-direction: row;
+  &__confirm-section {
+    &--button {
+      color: $confirm-color;
+    }
+  }
+}

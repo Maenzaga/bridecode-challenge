@@ -25,7 +25,11 @@
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": ["error"],
     "react/prop-types": "off",
+    "react/no-unused-prop-types":"off",
+    "react/require-default-props":"off",
     "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
+    "prettier/prettier": ["off", { "singleQuote": true }],
+    "import/prefer-default-export":"off",
     "import/extensions": [
       "error",
       "ignorePackages",

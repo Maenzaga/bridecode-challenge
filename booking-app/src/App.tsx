@@ -1,6 +1,34 @@
+import { useEffect, useState } from "react";
+import api from "./api/bookings";
 import "./App.scss";
+import { BookingCard } from "./components/BookingCard/BookingCard";
 
 function App() {
+  const [bookings, setBookings] = useState<any[]>([]);
+
+  const retrieveBookings = async () => {
+    const response = await api.get("/bookedByCouples");
+    console.log(response.data);
+    return response.data;
+  };
+
+  const removeBookings = async (id: string) => {
+    await api.delete(`/bookings/${id}`);
+    const newBookingsList = bookings.filter((booking) => {
+      return booking.id !== id;
+    });
+
+    setBookings(newBookingsList);
+  };
+
+  useEffect(() => {
+    const getAllBookings = async () => {
+      const allBookings = await retrieveBookings();
+      if (allBookings) setBookings(allBookings);
+    };
+    getAllBookings();
+  }, []);
+
   return (
     <>
       <header className="app-header">
@@ -11,35 +39,18 @@ function App() {
         </p>
       </header>
       <main className="main-content">
-        <div className="card-container">
-          {/* <div className="image-container" /> */}
-          <div className="booking-info">
-            <section className="booking-info__date-section">
-              <p className="booking-info__date-section--date">17 Oct, 2022</p>
-              <p className="booking-info__date-section--guests">70 guests</p>
-            </section>
-            <section className="booking-info__names-section">
-              <p className="booking-info__names-section--names">
-                Sarah & Chris
-              </p>
-              <p className="booking-info__names-section--mail">
-                sarah-chris@gmail.com
-              </p>
-            </section>
-          </div>
-          <div className="booking-confirmation">
-            <p className="booking-confirmation__connected">CONNECTED</p>
-            <section className="booking-confirmation__confirm-section">
-              <button
-                type="button"
-                className="booking-confirmation__confirm-section--button"
-              >
-                Confirm Booking
-              </button>
-              <p className="">Not my booking</p>
-            </section>
-          </div>
-        </div>
+        {bookings.map((booking) => {
+          return (
+            <BookingCard
+              key={booking.id}
+              image={booking.profilePhoto}
+              name1={booking.partners[0]}
+              name2={booking.partners[1]}
+              mail={booking.users[0].contacts.email}
+              date={booking.weddingDate}
+            />
+          );
+        })}
       </main>
     </>
   );
