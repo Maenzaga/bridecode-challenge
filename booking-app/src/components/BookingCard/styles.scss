@@ -1,8 +1,12 @@
 $confirm-color: #2ebaa7;
+$cancel-color: #dd5b59;
+$light-color: #808080;
+$main-font: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS";
 
 .card-container {
   padding: 1rem;
   margin: 1rem;
+  border-radius: 5%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -13,24 +17,75 @@ $confirm-color: #2ebaa7;
   .booking-image {
     width: 6.5rem;
     height: 5.5rem;
-    border-radius: 50%;
+    border-radius: 10%;
   }
 }
 
 .booking-info {
   display: flex;
   flex-direction: row;
+  &__date-section {
+    width: 7rem;
+    margin-left: 1rem;
+    &--date {
+      font-weight: bold;
+      font-family: $main-font;
+    }
+    &--guests {
+      font-family: $main-font;
+      color: $light-color;
+    }
+  }
   &__names-section {
     margin-left: 1rem;
+    &--names {
+      font-weight: bold;
+      font-family: $main-font;
+    }
+    &--mail {
+      font-family: $main-font;
+      color: $light-color;
+    }
   }
 }
 
 .booking-confirmation {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  &__connected {
+    border-style: solid;
+    border-color: $confirm-color;
+    color: $confirm-color;
+    font-family: $main-font;
+    border-radius: 10%;
+    margin-right: 2rem;
+    &:hover {
+      border-color: $cancel-color;
+      color: $cancel-color;
+    }
+  }
   &__confirm-section {
+    display: flex;
+    flex-direction: column;
     &--button {
-      color: $confirm-color;
+      display: flex;
+      height: 2rem;
+      width: 9.5rem;
+      align-items: center;
+      justify-content: center;
+      background-color: $confirm-color;
+      color: white;
+      font-family: $main-font;
+      font-weight: bold;
+      font-size: 17px;
+      outline: transparent;
+      border-radius: 30%;
+      cursor: pointer;
+    }
+    &--text {
+      font-family: $main-font;
+      text-align: center;
     }
   }
 }
