@@ -18,6 +18,10 @@ export const BookingList = ({ bookings }: BookingListProps) => (
           mail={booking.users[0].email}
           date={booking.weddingDate}
           collaborating={booking.collaborating}
+          createdAt={booking.createdAt}
+          tasksDone={booking.tasksDone}
+          tasksTotal={booking.tasksTotal}
+          guestsInitialTarget={booking.guestsInitialTarget}
         />
       );
     })}

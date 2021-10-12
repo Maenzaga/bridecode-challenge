@@ -24,7 +24,6 @@ export const useFetchBookings = () => {
     });
 
     setBookings(newBookingsList);
-
   };
 
   useEffect(() => {
@@ -33,5 +32,5 @@ export const useFetchBookings = () => {
       }
   }, [data])
 
-  return { data: bookings, error }
+  return { data: bookings, error, removeBookings}
 }

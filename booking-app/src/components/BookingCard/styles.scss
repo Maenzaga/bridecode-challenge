@@ -53,18 +53,41 @@ $main-font: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS";
   display: flex;
   flex-direction: row;
   align-items: center;
-  &__connected {
-    border-style: solid;
-    border-color: $confirm-color;
-    color: $confirm-color;
-    font-family: $main-font;
-    border-radius: 10%;
-    margin-right: 2rem;
-    &:hover {
-      border-color: $cancel-color;
-      color: $cancel-color;
+
+  &__container {
+    display: flex;
+    flex-direction: row;
+    &--connected {
+      height: 1.5rem;
+      cursor: pointer;
+      align-self: center;
+      margin-right: 5rem;
+      border-style: solid;
+      border-color: $confirm-color;
+      color: $confirm-color;
+      font-family: $main-font;
+      border-radius: 10%;
+      &:hover {
+        border-color: $cancel-color;
+        color: $cancel-color;
+      }
+    }
+
+    &--info {
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+      justify-content: center;
+      font-family: $main-font;
+      &--text1 {
+        margin: 0.5rem;
+      }
+      &--text2 {
+        margin: 0.5rem;
+      }
     }
   }
+
   &__confirm-section {
     display: flex;
     flex-direction: column;
@@ -86,6 +109,8 @@ $main-font: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS";
     &--text {
       font-family: $main-font;
       text-align: center;
+      margin-top: 1rem;
+      cursor: pointer;
     }
   }
 }

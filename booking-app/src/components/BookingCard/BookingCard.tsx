@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import ProgressBar from "@ramonak/react-progress-bar";
 import "./styles.scss";
+import { useFetchBookings } from "../../useFetchBookings";
 
 interface BookingCardProps {
   id?: string;
@@ -9,6 +11,10 @@ interface BookingCardProps {
   name1: string;
   name2: string;
   collaborating: boolean;
+  createdAt: string;
+  tasksDone: number;
+  tasksTotal: number;
+  guestsInitialTarget: number;
 }
 
 export const BookingCard = ({
@@ -18,19 +24,27 @@ export const BookingCard = ({
   mail,
   image,
   collaborating,
+  createdAt,
+  tasksDone,
+  tasksTotal,
+  guestsInitialTarget,
 }: BookingCardProps) => {
   const [confirmation, setConfirmation] = useState(collaborating);
+  const [text, setText] = useState("CONNECTED");
+  const { removeBookings } = useFetchBookings();
 
+  const completion = (tasksDone / tasksTotal) * 100;
+  const guests = !guestsInitialTarget ? 0 : guestsInitialTarget;
   const confirmBooking = (
     event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>
   ) => {
     setConfirmation(!confirmation);
   };
-
-  /* const buttonHandler =(event: React.MouseEvent<HTMLButtonElement>)=>{
-      event.preventDefault();
-
-  } */
+  const deleteBooking = (
+    event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>
+  ) => {
+    return removeBookings;
+  };
 
   return (
     <div className="card-container">
@@ -40,7 +54,7 @@ export const BookingCard = ({
         </div>
         <section className="booking-info__date-section">
           <p className="booking-info__date-section--date">{date}</p>
-          <p className="booking-info__date-section--guests">50</p>
+          <p className="booking-info__date-section--guests">{guests}</p>
         </section>
         <section className="booking-info__names-section">
           <p className="booking-info__names-section--names">
@@ -59,22 +73,43 @@ export const BookingCard = ({
             >
               Confirm Booking
             </section>
-            <p className="booking-confirmation__confirm-section--text">
+            <section
+              className="booking-confirmation__confirm-section--text"
+              onClick={deleteBooking}
+              onKeyDown={deleteBooking}
+            >
               Not my booking
-            </p>
+            </section>
           </section>
         </div>
       ) : (
-        <>
+        <div className="booking-confirmation__container">
           <section
-            className="booking-confirmation__connected"
+            className="booking-confirmation__container--connected"
             onClick={confirmBooking}
             onKeyDown={confirmBooking}
+            onMouseOver={() => setText("DISCONNECT")}
+            onFocus={() => setText("DISCONNECT")}
+            onMouseLeave={() => setText("CONNECTED")}
           >
-            CONNECTED
+            {text}
           </section>
-          <h1>HOLA</h1>
-        </>
+          <section className="booking-confirmation__container--info">
+            <p className="booking-confirmation__container--info--text1">
+              Added {createdAt}
+            </p>
+            <p className="booking-confirmation__container--info--text2">
+              Checklist Completion
+            </p>
+            <ProgressBar
+              completed={completion}
+              bgColor="#2ebaa7"
+              height="5px"
+              isLabelVisible={false}
+            />
+          </section>
+          <div />
+        </div>
       )}
     </div>
   );
